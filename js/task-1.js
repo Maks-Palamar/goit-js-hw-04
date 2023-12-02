@@ -1,18 +1,34 @@
-function makeTransaction(quantity, pricePerDroid) {
-    return `You ordered ${quantity} droids worth ${pricePerDroid} credits!`;
-};
+function isEnoughCapacity(products, containerSize) {
+    let productsSum = 0;
 
-console.log(makeTransaction(5, 3000)); // "You ordered 5 droids worth 15000 credits!"
-console.log(makeTransaction(3, 1000)); // "You ordered 3 droids worth 3000 credits!"
-console.log(makeTransaction(10, 5000)); // "You ordered 10 droids worth 5000 credits!"
+    for (let key in products) {
+        productsSum += products[key];
 
+        if (productsSum > containerSize) {
+            console.log('Too many items, your container cannot contain them all');
+            return false;
+        } else if (productsSum === containerSize) {
+            console.log('Container perfectly fits this number of products, but won\'t fit any more');
+            return true;
+        }
+    }
 
-/*
-function makeTransaction(quantity, pricePerDroid) {
-    console.log(`You ordered ${quantity} droids worth ${pricePerDroid} credits!`);
-};
+    console.log('All products fit into this container');
+    return true;
+}
 
-makeTransaction(5, 3000);
-makeTransaction(3, 1000);
-makeTransaction(10, 5000);
-*/
+console.log(
+  isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)
+); // false
+
+console.log(
+  isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)
+); // false
