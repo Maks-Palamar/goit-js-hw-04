@@ -3,17 +3,13 @@ function isEnoughCapacity(products, containerSize) {
 
     for (let key in products) {
         productsSum += products[key];
-
-        if (productsSum > containerSize) {
-            console.log('Too many items, your container cannot contain them all');
-            return false;
-        } else if (productsSum === containerSize) {
-            console.log('Container perfectly fits this number of products, but won\'t fit any more');
-            return true;
-        }
     }
 
-    console.log('All products fit into this container');
+    if (productsSum > containerSize) {
+            return false;
+        } else if (productsSum === containerSize) {
+            return true;
+        }
     return true;
 }
 
